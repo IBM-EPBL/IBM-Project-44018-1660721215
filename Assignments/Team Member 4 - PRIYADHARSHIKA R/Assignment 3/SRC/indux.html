@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/shop-grid-4.html   11 Nov 2019 12:39:07 GMT -->
+<head>
+
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+  <nav>
+    <div class="menu-icon">
+       <span class="fas fa-bars"></span>
+    </div>
+    <div class="logo">
+       Job Recommendation
+    </div>
+    <div class="nav-items">
+       <li><a href="#">Home</a></li>
+       <li><a href="#">About</a></li>
+       <li><a href="#">Contact</a></li>
+       <li><a href="#">Profile</a></li>
+    </div>
+    <div class="search-icon">
+       <span class="fas fa-search"></span>
+    </div>
+    <div class="cancel-icon">
+       <span class="fas fa-times"></span>
+    </div>
+    <form action="#">
+       <input type="search" class="search-data" placeholder="Search" required>
+       <button type="submit" class="fas fa-search"></button>
+    </form>
+ </nav>
+
+  {%for i in range(0, len)%}
+
+  <div class="jobs-container">
+    <div class="job">
+      <div class="job-preview">
+        <br>
+        <center><img class="img" src="{{job_image[i]}}" width="80" height="50" ></center>
+        
+      </div>
+      <div class="job-info">
+      
+         <h2>{{job_name[i]}} - {{job_location[i]}} ({{job_salary[i]}})</h2>
+         <h2>{{job_role[i]}}</h2>
+        <h4>Contact: {{job_number[i]}}</h4>
+        
+        <button class="btn">REGISTER</button>
+      </div>
+    </div>
+  </div>
+  
+  {%endfor%}
+
+  <script>
+
+  window.watsonAssistantChatOptions = {
+    integrationID: "13f23c10-0747-4d32-96d2-3e71a6a7ccd7", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "1ca1a1b9-9186-4b84-8341-6508cd8301e7", // The ID of your service instance.
+    onLoad: function(instance) { instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+
+    const menuBtn = document.querySelector(".menu-icon span");
+    const searchBtn = document.querySelector(".search-icon");
+    const cancelBtn = document.querySelector(".cancel-icon");
+    const items = document.querySelector(".nav-items");
+    const form = document.querySelector("form");
+    menuBtn.onclick = ()=>{
+      items.classList.add("active");
+      menuBtn.classList.add("hide");
+      searchBtn.classList.add("hide");
+      cancelBtn.classList.add("show");
+    }
+    cancelBtn.onclick = ()=>{
+      items.classList.remove("active");
+      menuBtn.classList.remove("hide");
+      searchBtn.classList.remove("hide");
+      cancelBtn.classList.remove("show");
+      form.classList.remove("active");
+      cancelBtn.style.color = "#ff3d00";
+    }
+    searchBtn.onclick = ()=>{
+      form.classList.add("active");
+      searchBtn.classList.add("hide");
+      cancelBtn.classList.add("show");
+    }
+ </script>
+
+</body>
+
+</html>
